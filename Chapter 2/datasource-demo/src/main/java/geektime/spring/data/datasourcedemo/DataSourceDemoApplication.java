@@ -21,19 +21,22 @@ public class DataSourceDemoApplication implements CommandLineRunner {
 	private JdbcTemplate jdbcTemplate;
 
 	public static void main(String[] args) {
+		System.out.println("main-thread Starting...");
 		SpringApplication.run(DataSourceDemoApplication.class, args);
+		System.out.println("Exit main-thread");
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println(this.toString() + " run method");
 		showConnection();
 		showData();
 	}
 
 	private void showConnection() throws SQLException {
-		log.info(dataSource.toString());
+		log.info("DataSource: " + dataSource.toString());
 		Connection conn = dataSource.getConnection();
-		log.info(conn.toString());
+		log.info("Connection: " + conn.toString());
 		conn.close();
 	}
 
