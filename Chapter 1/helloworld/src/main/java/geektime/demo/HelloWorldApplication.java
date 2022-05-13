@@ -17,5 +17,10 @@ public class HelloWorldApplication {
 	public String hello() {
 		return "Hello World!";
 	}
+
+	@RequestMapping("/hellospring")
+	public String hellospring() {
+		return "Hello My Spring World!";
+	}
 }
 
