@@ -62,5 +62,26 @@ public class MultiDataSourceDemoApplication {
     public PlatformTransactionManager barTxManager(DataSource barDataSource) {
         return new DataSourceTransactionManager(barDataSource);
     }
+
+    // add by Lemon
+    @Bean
+    @ConfigurationProperties("cmp.datasource")
+    public DataSourceProperties cmpDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    public DataSource cmpDataSource() {
+        DataSourceProperties dataSourceProperties = cmpDataSourceProperties();
+        log.info("cmp datasource: {}", dataSourceProperties.getUrl());
+        return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    @Resource
+    public PlatformTransactionManager cmpTxManager(DataSource cmpDataSource) {
+        return new DataSourceTransactionManager(cmpDataSource);
+    }
+
 }
 
